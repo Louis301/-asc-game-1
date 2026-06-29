@@ -36,6 +36,13 @@ enum EKey {
 	EK_Right = 77
 };
 
+enum EColor {
+  EC_Yellow = 14, 
+	EC_Black = 0,
+	EC_White = 15,
+	EC_Gray = 12
+};
+
 
 void inicFields();
 char checkingCell(vector<string> Vector, cursorPosition gamer);
@@ -511,7 +518,7 @@ void gameCicle()
 		{			
 			//printer player 
 			field_printer(' ', 0, 0, 8, 1, 17, 1);
-			SetColor(14, 0);
+			SetColor(EC_Yellow, EC_Black);
 			setcur(19, 1); cout << "User";
 			setcur(18, 2); cout << "motion";
 		
@@ -536,11 +543,11 @@ void gameCicle()
 				//checking cell condition
 				case EK_Enter: 
 				{
-					SetColor(15, 0);
+					SetColor(EC_White, EC_Black);
 	        computerField_vector[gamer.y][gamer.x] = checkingCell(computerField_vector, gamer); 
 	        if(computerField_vector[gamer.y][gamer.x] == 'd')
 		    		boatFrame(computerField_vector, gamer);
-					SetColor(15, 0);
+					SetColor(EC_White, EC_Black);
 					setcur(23, 7); 
 					cout << gamerScore;
 					break;
@@ -550,12 +557,12 @@ void gameCicle()
 				{
 					int value2;
 					field_printer(' ', 0, 0, 40, 12, 1, 1);	
-					setcur(1, 1); SetColor(14, 0); cout << "Space"; SetColor(15, 0); cout << " - hit the cage";
-					setcur(1, 2); SetColor(14, 0); cout << "Arrows"; SetColor(15, 0); cout << " - movement on the field";
-					setcur(1, 3); SetColor(14, 0); cout << "Esc"; SetColor(15, 0); cout << " - exit from game";
-					setcur(1, 5); SetColor(14, 0); cout << "h"; SetColor(15, 0); cout << " - return to the game";
+					setcur(1, 1); SetColor(EC_Yellow, EC_Black); cout << "Space"; SetColor(EC_White, EC_Black); cout << " - hit the cage";
+					setcur(1, 2); SetColor(EC_Yellow, EC_Black); cout << "Arrows"; SetColor(EC_White, EC_Black); cout << " - movement on the field";
+					setcur(1, 3); SetColor(EC_Yellow, EC_Black); cout << "Esc"; SetColor(EC_White, EC_Black); cout << " - exit from game";
+					setcur(1, 5); SetColor(EC_Yellow, EC_Black); cout << "h"; SetColor(EC_White, EC_Black); cout << " - return to the game";
 					value2 = getch();
-					while(value2 != 104)
+					while(value2 != EK_H)
 						value2 = getch();
 					setcur(0, 0);
 					printerFirstCondition();
@@ -579,7 +586,7 @@ void gameCicle()
     if(motion == 1)
   	{
 			//printer player
-			SetColor(12, 0);
+			SetColor(EC_Gray, EC_Black);
 			setcur(17, 1); cout << "Computer";
 			setcur(18, 2); cout << "motion";
 			Sleep(1200);
@@ -588,7 +595,7 @@ void gameCicle()
 			gamerField_vector[computer.y][computer.x] = checkingCell(gamerField_vector, computer);
 
 			//printer Score
-			SetColor(15, 0);
+			SetColor(EC_White, EC_Black);
 			setcur(25, 6); 
       cout << computerScore;
 
@@ -819,19 +826,24 @@ void printerFirstCondition()
 		}
 	}
 
-	SetColor(15, 0);	
+	SetColor(EColor::EC_White, 0);	
 	setcur(18, 4); cout << "Score";
 	setcur(15, 5); cout << "------------";
 	setcur(15, 6); cout << "computer: ";
 	setcur(17, 7); cout << "user: ";
-	setcur(17, 9); SetColor(14, 0); cout << "h"; SetColor(15, 0); cout << " - help";
+	
+	setcur(17, 9); 
+	SetColor(EColor::EC_Yellow, 0); 
+	cout << "h"; 
+	SetColor(EColor::EC_White, 0); 
+	cout << " - help";
 	
 	//printer Scores of gamers
-	SetColor(15, 0);
+	SetColor(EColor::EC_White, 0);
 	setcur(25, 6); 
 	cout << computerScore;
 	
-	SetColor(15, 0);
+	SetColor(EColor::EC_White, 0);
 	setcur(23, 7); 
 	cout << gamerScore;
 }
@@ -844,7 +856,7 @@ void scorePrinter()
 	//printer gamer score
 	if(gamerScore == 10) 
 	{
-		SetColor(14, 0);
+		SetColor(EColor::EC_Yellow, 0);
 		setcur(15, 1); cout << "------------";
 		setcur(17, 2); cout << "You win!";
 	}
@@ -853,7 +865,7 @@ void scorePrinter()
 	if(computerScore == 10) 
 	{
 		field_printer(' ', 0, 0, 8, 2, 17, 1);
-		SetColor(12, 0);
+		SetColor(EColor::EC_Gray, 0);
 		setcur(15, 1); cout << "------------";
 		setcur(17, 2); cout << "You fail";
 	}
@@ -882,9 +894,10 @@ int main()
 	gameCicle(); //game process
 	 
 	setcur(14, 10); 
-	SetColor(14, 0); 
+	SetColor(EColor::EC_Yellow, 0); 
 	cout << "c"; 
-	SetColor(15, 0); 
+
+	SetColor(EColor::EC_White, 0); 
 	cout << " - play again";
 	
 	field_printer(' ', 0, 0, 11, 1, 14, 9);
@@ -896,7 +909,7 @@ int main()
 			goto playAgain; 
 			break;
 		case EK_Esc: 
-			SetColor(15, 0); 
+			SetColor(EColor::EC_White, 0); 
 			setcur(0, map_lenght + 2);
 			Sleep(1000);
     		return 0;
