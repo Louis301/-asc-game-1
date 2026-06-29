@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Добавьте все ваши .cpp файлы
-file(GLOB_RECURSE SOURCES "src/*")
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
 add_executable(${PROJECT_NAME} ${SOURCES})
